@@ -30,24 +30,18 @@ fn part1(input: &str) -> i32 {
 
 fn is_over(games: &str, colour: &str, limit: i32) -> bool {
     let mut result = false;
-    let rounds = games
-        .split(";")
-        .map(str::to_string)
-        .collect::<Vec<String>>();
+    let rounds = games.split(";").filter(|x| x.contains(colour));
 
     for round in rounds {
-        if !round.contains(colour) {
-            continue;
-        } else {
-            round.split(",").for_each(|x| {
-                if x.contains(colour) {
-                    let num = x.trim().split(" ").next().unwrap().parse::<i32>().unwrap();
-                    if num > limit {
-                        result = true;
-                    }
+        round
+            .split(",")
+            .filter(|x| x.contains(colour))
+            .for_each(|x| {
+                let num = x.trim().split(" ").next().unwrap().parse::<i32>().unwrap();
+                if num > limit {
+                    result = true;
                 }
             });
-        }
     }
     return result;
 }
