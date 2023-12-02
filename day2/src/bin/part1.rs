@@ -19,9 +19,6 @@ fn part1(input: &str) -> i32 {
         let red = is_over(games, "red", 12);
         let blue = is_over(games, "blue", 14);
         let green = is_over(games, "green", 13);
-        // if red <= 12 && blue <= 14 && green <= 13 {
-        //     total += id.parse::<i32>().unwrap();
-        // }
         if red || blue || green {
             continue;
         } else {
