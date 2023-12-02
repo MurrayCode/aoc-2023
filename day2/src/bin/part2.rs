@@ -18,19 +18,17 @@ fn part2(input: &str) -> i32 {
 
 fn get_highest(games: &str, colour: &str) -> i32 {
     let mut highest = 0;
-    let rounds = games.split(";").filter(|x| x.contains(colour));
-
-    for round in rounds {
-        round
-            .split(",")
-            .filter(|x| x.contains(colour))
-            .for_each(|x| {
+    games
+        .split(";")
+        .filter(|x| x.contains(colour))
+        .for_each(|x| {
+            x.split(",").filter(|x| x.contains(colour)).for_each(|x| {
                 let num = x.trim().split(" ").next().unwrap().parse::<i32>().unwrap();
                 if highest < num {
                     highest = num;
                 }
             });
-    }
+        });
     return highest;
 }
 

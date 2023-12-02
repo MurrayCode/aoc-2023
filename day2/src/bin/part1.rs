@@ -30,19 +30,18 @@ fn part1(input: &str) -> i32 {
 
 fn is_over(games: &str, colour: &str, limit: i32) -> bool {
     let mut result = false;
-    let rounds = games.split(";").filter(|x| x.contains(colour));
-
-    for round in rounds {
-        round
-            .split(",")
-            .filter(|x| x.contains(colour))
-            .for_each(|x| {
+    games
+        .split(";")
+        .filter(|x| x.contains(colour))
+        .for_each(|x| {
+            x.split(",").filter(|x| x.contains(colour)).for_each(|x| {
                 let num = x.trim().split(" ").next().unwrap().parse::<i32>().unwrap();
                 if num > limit {
                     result = true;
                 }
             });
-    }
+        });
+
     return result;
 }
 
